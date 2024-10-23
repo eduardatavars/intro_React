@@ -1,17 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Formulario = () => {
-    let [materiaA, setMateriaA] = useState(0);
-    let [materiaB, setMateriaB] = useState(0);
-    let [materiaC, setMateriaC] = useState(0);
-    let [nome, setNome] = useState('');
+    const [materiaA, setMateriaA] = useState(0);
+    const [materiaB, setMateriaB] = useState(0);
+    const [materiaC, setMateriaC] = useState(0);
+    const [nome, setNome] = useState('');
+
+    //ciclo de vida react
+    // mount - montado
+    //update - atualizado
+    //onmount - desmontado
+
+    useEffect(() => {
+        console.log("o componente iniciou");
+
+        return () => {
+            console.log("o componente finalizou")
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log("o estado nome mudou");
+    }, [nome]);
+
+    useEffect(() => {
+        console.log("Materia A mudou para: " + materiaA)
+    }, [materiaA, materiaB, materiaC]);
+
 
     const alteraNome = (evento) => {
         // console.log(evento.target.value);
         // setNome(evento.target.value);
         setNome(estadoAnterior => {
-            console.log(estadoAnterior);
-
             return evento.target.value;
         })
     }

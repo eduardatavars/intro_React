@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Perfil from "./components/Perfil";
 import Formulario from "./components/Perfil/Formulario";
 
@@ -13,6 +15,7 @@ function App() {
   // }
 
   // let estaDeDia = false;
+  const [formularioVisivel, setFormularioVisivel] = useState(true);
 
   return(
     <>
@@ -21,7 +24,10 @@ function App() {
       <h1>Olá, {pessoa.nome}</h1>
       <h2>Subtitulo</h2>
       {estaDeDia ? 'Bom dia!' : 'Boa tarde!'} */}
-      <Formulario />
+      {formularioVisivel && (
+        <Formulario/>
+        )}
+      <button onClick={() => setFormularioVisivel(!formularioVisivel)} type="button">toggle form</button>
     </>
   )
 }
