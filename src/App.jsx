@@ -21,7 +21,9 @@ function App() {
 
   return(
     <>
-      <input type="text" onBlur={(e) => setNomeUsuario(e.target.value)} />
+      <div className="input">
+        <input type="text" onBlur={(e) => setNomeUsuario(e.target.value)} />
+      </div>
 
       {nomeUsuario.length > 4 && (
         <>

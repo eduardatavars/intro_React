@@ -5,17 +5,27 @@ import styles from './ReposList.module.css';
 const ReposList = ({ nomeUsuario }) => {
     const [repos, setRepos] = useState([]);
     const [estaCarregando, setEstaCarregando] = useState(true);
+    const [deuError, setDeuError] = useState(false);
 
     useEffect(() => {
         setEstaCarregando(true);
+        setDeuError(false);
         fetch(`https://api.github.com/users/${nomeUsuario}/repos`)
         .then( res => res.json())
         .then(resJson => {
             setTimeout(() => {
                 setEstaCarregando(false);
-                setRepos(resJson);
-            }, 3000);
+                if (resJson.message === "Not Found") {
+                    setDeuError(true); //se o user não existir, ativa o erro
+                    setRepos([]); //limpa o repositório
+                } else {
+                    setRepos(resJson);
+                }
+            }, 2000);
             
+        })
+        .catch(() => {
+            setDeuError(true); //ativa o erro em caso de falha na requisição
         })
     }, [nomeUsuario]);
 
@@ -23,6 +33,8 @@ const ReposList = ({ nomeUsuario }) => {
         <div className="container">
             {estaCarregando ? (
                 <h1>Carregando...</h1>
+            ) : deuError ? (
+                <h1>Usuário não existe! Tente novamente.</h1> //mensagem de erro
             ) : (
                 <ul className={styles.list}>
                     {/* {repos.map(({id, name, language, html_url}) => (

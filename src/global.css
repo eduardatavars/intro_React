@@ -11,6 +11,20 @@
     margin: 0 auto;
 }
 
+.input {
+    text-align: center;
+}
+
+.input input {
+    padding: 8px;
+    margin: 12px 0;
+    background-color: var(--corPrincipal);
+    color: var(--corSecundaria);
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px; 
+}
+
 :root {
     --corPrincipal: #9980FA;
     --corSecundaria: #f6e58d;
