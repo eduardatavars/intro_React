@@ -17,19 +17,27 @@ function App() {
 
   // let estaDeDia = false;
   const [formularioVisivel, setFormularioVisivel] = useState(true);
+  const [nomeUsuario, setNomeUsuario] = useState('');
 
   return(
     <>
-      <Perfil nome="Maria Tavares" endereco="https://github.com/eduardatavars.png" />
-      <ReposList />
+      <input type="text" onBlur={(e) => setNomeUsuario(e.target.value)} />
+
+      {nomeUsuario.length > 4 && (
+        <>
+          <Perfil nomeUsuario={nomeUsuario} />
+          <ReposList nomeUsuario={nomeUsuario}/>
+        </>
+      )}
+
       {/* <h1>Olá, {retornaNome()}</h1>
       <h1>Olá, {pessoa.nome}</h1>
       <h2>Subtitulo</h2>
       {estaDeDia ? 'Bom dia!' : 'Boa tarde!'} */}
-      {formularioVisivel && (
+      {/* {formularioVisivel && (
         <Formulario/>
         )}
-      <button onClick={() => setFormularioVisivel(!formularioVisivel)} type="button">toggle form</button>
+      <button onClick={() => setFormularioVisivel(!formularioVisivel)} type="button">toggle form</button> */}
     </>
   )
 }
